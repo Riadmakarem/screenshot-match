@@ -28,3 +28,6 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Keep institutional content in a shared browser-safe module and render it through individual TanStack routes so each page has its own metadata.
+- The current contact experience is a clearly labeled frontend demonstration; never send mock contact data to real recipients.

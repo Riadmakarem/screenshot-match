@@ -1,0 +1,6 @@
+import { createFileRoute, Link, notFound } from '@tanstack/react-router';
+import { articles, pageHead } from '@/lib/site-content';
+import { PageTitle } from '@/components/institutional';
+import { ArrowLeft } from 'lucide-react';
+export const Route = createFileRoute('/publicacoes/$slug')({loader:({params})=>{const article=articles.find(a=>a.slug===params.slug);if(!article)throw notFound();return article;},head:({loaderData})=>pageHead(loaderData?.title??'Publicação indisponível',loaderData?.intro??'A publicação solicitada não está disponível.'),component:Article});
+function Article(){const article=Route.useLoaderData();return <><PageTitle label={`${article.category} · ${article.date}`} title={article.title} description={article.intro}/><section className="section"><div className="wrap"><article className="article-body">{article.paragraphs.map(p=><p className="copy" key={p}>{p}</p>)}<p className="demo-note mt-10">Artigo ilustrativo. Conteúdo informativo, não substitui aconselhamento jurídico individualizado.</p><Link to="/publicacoes" className="text-link"><ArrowLeft size={15}/> Voltar às publicações</Link></article></div></section></>;}
