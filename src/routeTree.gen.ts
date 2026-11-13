@@ -10,33 +10,124 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AtuacaoRouteImport } from './routes/atuacao'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as EquipeRouteImport } from './routes/equipe'
+import { Route as EscritorioRouteImport } from './routes/escritorio'
+import { Route as PublicacoesRouteImport } from './routes/publicacoes'
+import { Route as PublicacoesIndexRouteImport } from './routes/publicacoes.index'
+import { Route as PublicacoesSlugRouteImport } from './routes/publicacoes.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AtuacaoRoute = AtuacaoRouteImport.update({
+  id: '/atuacao',
+  path: '/atuacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EquipeRoute = EquipeRouteImport.update({
+  id: '/equipe',
+  path: '/equipe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EscritorioRoute = EscritorioRouteImport.update({
+  id: '/escritorio',
+  path: '/escritorio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PublicacoesRoute = PublicacoesRouteImport.update({
+  id: '/publicacoes',
+  path: '/publicacoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PublicacoesIndexRoute = PublicacoesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PublicacoesRoute,
+} as any)
+const PublicacoesSlugRoute = PublicacoesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => PublicacoesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/atuacao': typeof AtuacaoRoute
+  '/contato': typeof ContatoRoute
+  '/equipe': typeof EquipeRoute
+  '/escritorio': typeof EscritorioRoute
+  '/publicacoes': typeof PublicacoesRouteWithChildren
+  '/publicacoes/$slug': typeof PublicacoesSlugRoute
+  '/publicacoes/': typeof PublicacoesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/atuacao': typeof AtuacaoRoute
+  '/contato': typeof ContatoRoute
+  '/equipe': typeof EquipeRoute
+  '/escritorio': typeof EscritorioRoute
+  '/publicacoes/$slug': typeof PublicacoesSlugRoute
+  '/publicacoes': typeof PublicacoesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/atuacao': typeof AtuacaoRoute
+  '/contato': typeof ContatoRoute
+  '/equipe': typeof EquipeRoute
+  '/escritorio': typeof EscritorioRoute
+  '/publicacoes': typeof PublicacoesRouteWithChildren
+  '/publicacoes/$slug': typeof PublicacoesSlugRoute
+  '/publicacoes/': typeof PublicacoesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/atuacao'
+    | '/contato'
+    | '/equipe'
+    | '/escritorio'
+    | '/publicacoes'
+    | '/publicacoes/$slug'
+    | '/publicacoes/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/atuacao'
+    | '/contato'
+    | '/equipe'
+    | '/escritorio'
+    | '/publicacoes/$slug'
+    | '/publicacoes'
+  id:
+    | '__root__'
+    | '/'
+    | '/atuacao'
+    | '/contato'
+    | '/equipe'
+    | '/escritorio'
+    | '/publicacoes'
+    | '/publicacoes/$slug'
+    | '/publicacoes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AtuacaoRoute: typeof AtuacaoRoute
+  ContatoRoute: typeof ContatoRoute
+  EquipeRoute: typeof EquipeRoute
+  EscritorioRoute: typeof EscritorioRoute
+  PublicacoesRoute: typeof PublicacoesRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +139,79 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/atuacao': {
+      id: '/atuacao'
+      path: '/atuacao'
+      fullPath: '/atuacao'
+      preLoaderRoute: typeof AtuacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe': {
+      id: '/equipe'
+      path: '/equipe'
+      fullPath: '/equipe'
+      preLoaderRoute: typeof EquipeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/escritorio': {
+      id: '/escritorio'
+      path: '/escritorio'
+      fullPath: '/escritorio'
+      preLoaderRoute: typeof EscritorioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/publicacoes': {
+      id: '/publicacoes'
+      path: '/publicacoes'
+      fullPath: '/publicacoes'
+      preLoaderRoute: typeof PublicacoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/publicacoes/': {
+      id: '/publicacoes/'
+      path: '/'
+      fullPath: '/publicacoes/'
+      preLoaderRoute: typeof PublicacoesIndexRouteImport
+      parentRoute: typeof PublicacoesRoute
+    }
+    '/publicacoes/$slug': {
+      id: '/publicacoes/$slug'
+      path: '/$slug'
+      fullPath: '/publicacoes/$slug'
+      preLoaderRoute: typeof PublicacoesSlugRouteImport
+      parentRoute: typeof PublicacoesRoute
+    }
   }
 }
 
+interface PublicacoesRouteChildren {
+  PublicacoesSlugRoute: typeof PublicacoesSlugRoute
+  PublicacoesIndexRoute: typeof PublicacoesIndexRoute
+}
+
+const PublicacoesRouteChildren: PublicacoesRouteChildren = {
+  PublicacoesSlugRoute: PublicacoesSlugRoute,
+  PublicacoesIndexRoute: PublicacoesIndexRoute,
+}
+
+const PublicacoesRouteWithChildren = PublicacoesRoute._addFileChildren(
+  PublicacoesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AtuacaoRoute: AtuacaoRoute,
+  ContatoRoute: ContatoRoute,
+  EquipeRoute: EquipeRoute,
+  EscritorioRoute: EscritorioRoute,
+  PublicacoesRoute: PublicacoesRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
