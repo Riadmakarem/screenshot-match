@@ -14,5 +14,13 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    // Pre-render every route to static HTML at build time so the site can be
+    // served as plain files by GitHub Pages (no server runtime available).
+    prerender: { enabled: true, crawlLinks: true },
+  },
+  vite: {
+    // GitHub Pages serves project sites from a subpath (e.g. /screenshot-match/).
+    // The deploy workflow sets PAGES_BASE accordingly; local builds default to "/".
+    base: process.env.PAGES_BASE || "/",
   },
 });
